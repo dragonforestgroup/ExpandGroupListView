@@ -12,7 +12,7 @@
 		}
 	}
    ```
-   * LastVersion[1.0]
+   * LastVersion[1.2]
    <br>模块build.gradle:
    ```
     dependencies {

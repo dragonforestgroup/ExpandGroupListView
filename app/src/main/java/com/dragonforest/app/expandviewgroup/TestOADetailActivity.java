@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dragonforest.app.expandviewgroup.bean.MyOAItem;
 import com.dragonforest.app.lib_view.oagroupLayout.bean.OAItem;
 
 public class TestOADetailActivity extends AppCompatActivity {
@@ -32,6 +33,15 @@ public class TestOADetailActivity extends AppCompatActivity {
         OAItem item = (OAItem) intent.getSerializableExtra("item");
         if (item != null) {
             toolbar.setTitle(item.getOaName());
+            Object data = item.getData();
+            if (data != null && data instanceof MyOAItem) {
+                MyOAItem mitem = (MyOAItem) data;
+                String msg = "携带的信息---->\n"
+                        + "我的ssid=" + mitem.getSsid() + "\n"
+                        + "我的地址=" + mitem.getAddress() + "\n"
+                        + "我的电话=" + mitem.getPhone();
+                ed_contact_us.setText(msg);
+            }
         }
     }
 
@@ -55,7 +65,7 @@ public class TestOADetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

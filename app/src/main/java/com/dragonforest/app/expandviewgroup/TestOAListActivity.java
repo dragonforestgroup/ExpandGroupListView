@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.dragonforest.app.expandviewgroup.bean.MyOAItem;
 import com.dragonforest.app.lib_view.oagroupLayout.OAGroupView;
 import com.dragonforest.app.lib_view.oagroupLayout.adapter.OAItemRecyclerAdapter;
 import com.dragonforest.app.lib_view.oagroupLayout.bean.OAGroup;
@@ -34,14 +35,16 @@ public class TestOAListActivity extends AppCompatActivity {
     }
 
     private void initOaGroupView() {
+        MyOAItem data=new MyOAItem("1501295534","北京市海淀区","123456789xxx");
+
         //  1.创建模拟数据
         //  常用中的数据
         List<OAGroup> oaGroups_use = new ArrayList<>();
         List<OAItem> listuu = new ArrayList<>();
-        listuu.add(new OAItem(R.drawable.libview_oa_dayoff, "请假"));
-        listuu.add(new OAItem(R.drawable.libview_oa_mail, "邮件"));
-        listuu.add(new OAItem(R.drawable.libview_oa_checkin, "打卡"));
-        listuu.add(new OAItem(R.drawable.libview_oa_money, "报销"));
+        listuu.add(new OAItem(R.drawable.libview_oa_dayoff, "请假",data));
+        listuu.add(new OAItem(R.drawable.libview_oa_mail, "邮件",data));
+        listuu.add(new OAItem(R.drawable.libview_oa_checkin, "打卡",data));
+        listuu.add(new OAItem(R.drawable.libview_oa_money, "报销",data));
         oaGroups_use.add(new OAGroup("人事jj",listuu));
 
         // OA,订单的数据（复用同一个）

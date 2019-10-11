@@ -1,6 +1,28 @@
 # 实现复杂的伸缩列表布局套件
 * 轻松实现高效复杂的伸缩列表
 
+# 引入
+   项目build.grade:
+    
+   ```
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+   ```
+   * LastVersion[1.0]
+   <br>模块build.gradle:
+   ```
+    dependencies {
+	        implementation 'com.github.dragonforestgroup:ExpandGroupListView:[lastVersion]'
+	}
+   ```
+
+# 布局介绍
+ * 以下布局均可单独使用
+ 
 ## ExpandableLayout: 可伸缩的布局
 * * 感谢 https://github.com/cachapa/ExpandableLayout  
 * 效果：<br>

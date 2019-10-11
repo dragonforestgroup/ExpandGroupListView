@@ -41,7 +41,7 @@ public class OAGroupView extends LinearLayout {
     private String title;
     private List<OAGroup> oaGroups;
     private int column = 4;
-    private int dividerHeight=0;
+    private int dividerHeight = 0;
 
     /**
      * 当前包含的OAGroupItemView集合
@@ -54,17 +54,31 @@ public class OAGroupView extends LinearLayout {
 
     public OAGroupView(Context context) {
         super(context);
-        initView(context);
+        initView(context, true);
+    }
+
+    public OAGroupView(Context context, boolean showCard) {
+        super(context);
+        initView(context, showCard);
     }
 
     public OAGroupView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context);
+        initView(context, true);
     }
 
-    private void initView(Context context) {
+    public OAGroupView(Context context, AttributeSet attrs, boolean showCard) {
+        super(context, attrs);
+        initView(context, showCard);
+    }
+
+    private void initView(Context context, boolean showAsCard) {
         this.context = context;
-        LayoutInflater.from(context).inflate(R.layout.libview_oagroup, this);
+        if (showAsCard) {
+            LayoutInflater.from(context).inflate(R.layout.libview_oagroup_card, this);
+        } else {
+            LayoutInflater.from(context).inflate(R.layout.libview_oagroup, this);
+        }
         tv_oa_title = findViewById(R.id.tv_oa_title);
         tv_expand = findViewById(R.id.tv_expand);
         expandableLayout = findViewById(R.id.expandableContentLayout);
@@ -116,7 +130,7 @@ public class OAGroupView extends LinearLayout {
             OAGroup oaGroup = oaGroups.get(i);
             OAGroupItemView oaGroupItemView = new OAGroupItemView(context);
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.topMargin=dividerHeight;
+            params.topMargin = dividerHeight;
             oaGroupItemView.setLayoutParams(params);
             oaGroupItemView.setTitle(oaGroup.getTitle());
             oaGroupItemView.setOaItemList(oaGroup.getOaItems());
@@ -166,6 +180,7 @@ public class OAGroupView extends LinearLayout {
 
     /**
      * 设置内部间隔 需要在setData之前调用
+     *
      * @param dividerHeight
      */
     public void setDividerHeight(int dividerHeight) {

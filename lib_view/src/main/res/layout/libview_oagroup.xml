@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!--头布局-->
@@ -20,10 +21,10 @@
             android:id="@+id/tv_oa_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="OA"
             android:drawableLeft="@drawable/ic_reorder_black_24dp"
             android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="OA"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -41,7 +42,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:background="#F3F3F5"/>
+        android:background="#F3F3F5" />
     <!--内容布局-->
     <com.dragonforest.app.lib_view.expandlayout.ExpandableLayout
         android:id="@+id/expandableContentLayout"
@@ -49,14 +50,15 @@
         android:layout_height="wrap_content"
         app:el_expanded="true">
 
+
         <LinearLayout
             android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:paddingRight="10dp"></LinearLayout>
+
     </com.dragonforest.app.lib_view.expandlayout.ExpandableLayout>
     <!--内容布局-end-->
 

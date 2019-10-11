@@ -1,14 +1,14 @@
-# UI套件
+# 实现复杂的伸缩列表布局套件
 * 轻松实现高效复杂的伸缩列表
 
 ## ExpandableLayout: 可伸缩的布局
 * * 感谢 https://github.com/cachapa/ExpandableLayout  
 * 效果：<br>
-   ![image](images/expandable.gif)
+   ![image](lib_view/images/expandable.gif)
    
 ## OAGroupView: 可伸缩的列表展示View
 * 效果：<br>
-   ![image](images/oagroup.gif)
+   ![image](lib_view/images/oagroup.gif)
 * 使用：<br>
    ```
     // ===构建数据集合
@@ -75,7 +75,7 @@
    
 # View组合关系：
 
-   * ![image](images/jiegou.png)
+   * ![image](lib_view/images/jiegou.png)
 
 
 

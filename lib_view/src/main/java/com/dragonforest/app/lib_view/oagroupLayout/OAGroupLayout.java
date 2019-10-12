@@ -76,14 +76,24 @@ public class OAGroupLayout extends ExpandableSplitLayout {
             @Override
             public void onClick(View v) {
                 expandOrCollapse();
+                changeText();
             }
         });
         tv_expand.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 expandOrCollapse();
+                changeText();
             }
         });
+    }
+
+    private void changeText() {
+        if(isExpanded()){
+            tv_expand.setText("收起");
+        }else{
+            tv_expand.setText("展开");
+        }
     }
 
     public void setData(List<OAGroup> oaGroups) {

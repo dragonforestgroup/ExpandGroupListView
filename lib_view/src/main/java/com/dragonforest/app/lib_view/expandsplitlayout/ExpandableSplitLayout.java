@@ -63,12 +63,12 @@ public class ExpandableSplitLayout extends LinearLayout {
 
     public void expand() {
         expandableLayout.setExpanded(true);
-        this.isExpanded=true;
+        this.isExpanded = true;
     }
 
     public void collapse() {
         expandableLayout.setExpanded(false);
-        this.isExpanded=false;
+        this.isExpanded = false;
     }
 
     public void expandOrCollapse() {
@@ -83,27 +83,27 @@ public class ExpandableSplitLayout extends LinearLayout {
         return isExpanded;
     }
 
-    public void setHeadLayout(View v){
+    public void setHeadLayout(View v) {
         headLayout.removeAllViews();
-        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        headLayout.addView(v,params);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        headLayout.addView(v, params);
     }
 
-    public void setContentView(View v){
+    public void setContentView(View v) {
         contentLayout.removeAllViews();
-        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        contentLayout.addView(v,params);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        contentLayout.addView(v, params);
     }
 
-    public void addContentView(View v){
+    public void addContentView(View v) {
         contentLayout.addView(v);
     }
 
-    public void clearContentViews(){
+    public void clearContentViews() {
         contentLayout.removeAllViews();
     }
 
-    public int getContentViewCount(){
+    public int getContentViewCount() {
         return contentLayout.getChildCount();
     }
 

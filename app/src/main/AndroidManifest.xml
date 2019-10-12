@@ -21,7 +21,6 @@
         <activity
             android:name=".TestOADetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
     </application>
 
 </manifest>

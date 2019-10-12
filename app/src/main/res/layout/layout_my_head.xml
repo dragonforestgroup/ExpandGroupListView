@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/libview_oa_car"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下面是一条通知"
+        android:textSize="12sp"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/tv_head_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="隐藏"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginLeft="20dp"/>
+</LinearLayout>

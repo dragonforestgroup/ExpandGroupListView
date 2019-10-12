@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExpandViewGroup</string>
+    <string name="app_msg">今天白天到明天晚上，局部地区会有小到暴雨，请在北京的人们注意带雨伞。为了凑字数，我在这里多唠叨几句，生活不易，且行且珍惜！多思考，多分析，代码是录不完的，
+        提高你思想的高度，做一个有思想的程序员</string>
 </resources>

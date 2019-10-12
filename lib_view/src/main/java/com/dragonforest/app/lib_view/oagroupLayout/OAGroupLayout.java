@@ -6,12 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dragonforest.app.lib_view.R;
-import com.dragonforest.app.lib_view.expandlayout.ExpandableLayout;
+import com.dragonforest.app.lib_view.expandsplitlayout.ExpandableSplitLayout;
 import com.dragonforest.app.lib_view.oagroupLayout.adapter.OAItemRecyclerAdapter;
 import com.dragonforest.app.lib_view.oagroupLayout.bean.OAGroup;
 
@@ -21,24 +19,18 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 /**
- * 伸缩办公布局集合
+ * 实现OA列表可伸缩布局
+ * <br></>包含头布局，和内容布局（包含一个或多个事务列表集合）
  *
  * @author 韩龙林
- * @date 2019/10/10 19:52
+ * @date 2019/10/12 10:16
  */
-public class OAGroupView extends LinearLayout {
-
-    boolean isExpanded = true;
-
-    Context context;
+public class OAGroupLayout extends ExpandableSplitLayout {
 
     private TextView tv_oa_title;
     private TextView tv_expand;
-    private ExpandableLayout expandableLayout;
-    private LinearLayout contentLayout;
-    private RelativeLayout headLayout;
 
-    private String title;
+    private Context context;
     private List<OAGroup> oaGroups;
     private int column = 4;
     private int dividerHeight = 0;
@@ -52,80 +44,52 @@ public class OAGroupView extends LinearLayout {
      */
     private OAItemRecyclerAdapter.OARecyclerViewItemClickListener oaRecyclerViewItemClickListener;
 
-    public OAGroupView(Context context) {
+    public OAGroupLayout(Context context) {
         super(context);
-        initView(context, true);
     }
 
-    public OAGroupView(Context context, boolean showCard) {
-        super(context);
-        initView(context, showCard);
+    public OAGroupLayout(Context context, boolean showCard) {
+        super(context, showCard);
     }
 
-    public OAGroupView(Context context, AttributeSet attrs) {
+    public OAGroupLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context, true);
     }
 
-    public OAGroupView(Context context, AttributeSet attrs, boolean showCard) {
-        super(context, attrs);
-        initView(context, showCard);
+    public OAGroupLayout(Context context, AttributeSet attrs, boolean showCard) {
+        super(context, attrs, showCard);
     }
 
-    private void initView(Context context, boolean showAsCard) {
+    @Override
+    public void initView(Context context, boolean showAsCard) {
         this.context = context;
-        if (showAsCard) {
-            LayoutInflater.from(context).inflate(R.layout.libview_oagroup_card, this);
-        } else {
-            LayoutInflater.from(context).inflate(R.layout.libview_oagroup, this);
-        }
+        super.initView(context, showAsCard);
+        View headView = LayoutInflater.from(context).inflate(R.layout.libview_oagroup_head, null, false);
+        setHeadLayout(headView);
+        initOAHeadView(headView);
+    }
+
+    private void initOAHeadView(View headView) {
         tv_oa_title = findViewById(R.id.tv_oa_title);
         tv_expand = findViewById(R.id.tv_expand);
-        expandableLayout = findViewById(R.id.expandableContentLayout);
-        contentLayout = findViewById(R.id.contentLayout);
-        headLayout = findViewById(R.id.headLayout);
-        tv_expand.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandOrCollapse();
-            }
-        });
         tv_oa_title.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 expandOrCollapse();
             }
         });
-    }
-
-    public void expand() {
-        expandableLayout.setExpanded(true);
-    }
-
-    public void collapse() {
-        expandableLayout.setExpanded(false);
-    }
-
-    public void expandOrCollapse() {
-        if (isExpanded) {
-            tv_expand.setText("展开");
-            collapse();
-        } else {
-            tv_expand.setText("收起");
-            expand();
-        }
-        isExpanded = !isExpanded;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-        tv_oa_title.setText(title);
+        tv_expand.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandOrCollapse();
+            }
+        });
     }
 
     public void setData(List<OAGroup> oaGroups) {
         this.oaGroups = oaGroups;
-        contentLayout.removeAllViews();
         oaGroupItemViews.clear();
+        clearContentViews();
         for (int i = 0; i < oaGroups.size(); i++) {
             OAGroup oaGroup = oaGroups.get(i);
             OAGroupItemView oaGroupItemView = new OAGroupItemView(context);
@@ -137,27 +101,21 @@ public class OAGroupView extends LinearLayout {
             if (oaRecyclerViewItemClickListener != null) {
                 oaGroupItemView.setItemOnClickListener(oaRecyclerViewItemClickListener);
             }
-            contentLayout.addView(oaGroupItemView);
+            addContentView(oaGroupItemView);
             oaGroupItemViews.add(oaGroupItemView);
             Log.e(TAG, "OAGroupView :添加oaItemGroupView");
         }
-        Log.e(TAG, "OAGroupView 的childView:" + contentLayout.getChildCount());
+        Log.e(TAG, "OAGroupView 的childView:" + getContentViewCount());
+    }
+
+    public List<OAGroup> getData() {
+        return oaGroups;
     }
 
     public void setItemOnClickListener(OAItemRecyclerAdapter.OARecyclerViewItemClickListener oaRecyclerViewItemClickListener) {
         this.oaRecyclerViewItemClickListener = oaRecyclerViewItemClickListener;
         for (OAGroupItemView oaGroupItemView : oaGroupItemViews) {
             oaGroupItemView.setItemOnClickListener(oaRecyclerViewItemClickListener);
-        }
-    }
-
-    // 扩展
-
-    public void showHead(boolean isShowHead) {
-        if (isShowHead) {
-            headLayout.setVisibility(VISIBLE);
-        } else {
-            headLayout.setVisibility(GONE);
         }
     }
 
@@ -179,7 +137,7 @@ public class OAGroupView extends LinearLayout {
     }
 
     /**
-     * 设置内部间隔 需要在setData之前调用
+     * should use before setData()
      *
      * @param dividerHeight
      */
@@ -203,11 +161,4 @@ public class OAGroupView extends LinearLayout {
         return tv_expand;
     }
 
-    public LinearLayout getContentLayout() {
-        return contentLayout;
-    }
-
-    public ExpandableLayout getExpandableLayout() {
-        return expandableLayout;
-    }
 }
